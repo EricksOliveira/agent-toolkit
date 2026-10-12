@@ -5,7 +5,7 @@ disable-model-invocation: true
 type: flow
 license: MIT
 metadata:
-  version: "0.1"
+  version: "0.2"
 ---
 
 # Harden artifact
@@ -135,7 +135,7 @@ Done when every surviving finding has a disposition.
 Any edit earns a fresh round: a new reviewer on the whole artifact with the same prompt, told
 nothing of earlier findings or decisions. A re-raised finding matching a dropped, dismissed or
 deferred one keeps that outcome unless it brings evidence the earlier one lacked. Rounds stop when
-one leads to no edit, or at 3 per invocation; the user may stop earlier or ask for more.
+one leads to no edit, or at 2 per invocation; the user may stop earlier or ask for more.
 
 Done when a stop condition has ended the rounds.
 
