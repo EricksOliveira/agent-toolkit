@@ -3,7 +3,7 @@ name: refine-pr-review
 description: Triage a fetched PR review with the user, comment by comment, drafting each reply and producing a REQUIREMENTS file for the accepted code changes. Takes the PR-REVIEW file produced by fetch-pr-review. Invoke manually only.
 license: MIT
 metadata:
-  version: "1.4"
+  version: "1.5"
 ---
 
 # Refine PR review
@@ -88,7 +88,9 @@ pushed back. One table row per comment, resolved and bot rows included for compl
   or, when it is not installed, plain prose with no dashes and no AI tells;
   canned one-liner for address. Post-fix stance: written as if the accepted changes are already
   made ("did X, kept Y as is because …") — the sheet is pasted after the fixes land. A reply too
-  long for a cell goes below the table, referenced by its row number.
+  long for a cell goes below the table under a `## Reply <row #>` heading that opens with the
+  original comment quoted in full as a blockquote, so each reply is checkable against its question
+  without scrolling back to the table.
 - **Notes** — the reasoning in a few words, for future review rounds.
 
 ## Lessons
