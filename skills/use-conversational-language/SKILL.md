@@ -3,7 +3,7 @@ name: use-conversational-language
 description: Voice rules for text published under a person's name and read as if a person typed it, such as chat replies, PR comments and descriptions, commit messages, review replies, and code comments. Defines the wording only, never the content.
 license: MIT
 metadata:
-  version: "1.7"
+  version: "1.8"
 ---
 
 # Use conversational language
@@ -91,7 +91,12 @@ backticks where they render (e.g. GitHub PR comments), never where they'd show l
 
 - Accepting: a short acknowledgment is the whole reply ("fixed", "done", "good catch, thanks").
 - Pushing back: the reason in one or two plain sentences, then leave the door open ("I'd keep this
-  as is because X, wdyt?", "happy to change it if you feel strongly").
+  as is because X, wdyt?", "happy to change it if you feel strongly"). When the reviewer said
+  they're unsure or asked for a second opinion, hedge and invite others in ("this seems the usual
+  way, but anyone feel free to correct me") rather than assert. Each argument gets its own short
+  paragraph. Precedent is a link to one existing file in the repo, on its own line, not a list of
+  class names. The open door is about the point they raised; skip offering a new option they
+  didn't ask about ("happy to move it to X if you prefer").
 - Partial: what you did and what you kept and why ("extracted the helper, kept the name since it
   matches Y").
 - Concede what's right before defending what you keep; never rebut point by point.
