@@ -18,3 +18,8 @@ type suffix naming its kind:
 
 Related tickets that hang off one parent/epic may instead share that parent's directory, each
 document keeping its own `<id>-<slug>` base.
+
+The planning directory is one per repository, not per checkout. From a linked git worktree (`git
+rev-parse --git-common-dir` is not `.git`), a gitignored planning directory lives in the main
+checkout — the first line of `git worktree list` — never in the worktree, where a fresh copy
+silently forks the task's docs. A tracked one is the branch's own and stays in the worktree.

@@ -186,7 +186,8 @@ installed separately from the skills.
   still make sense to a future reader with zero context, prefer no comment over a low-value one,
   and voice them via [use-conversational-language](./skills/use-conversational-language/SKILL.md).
 - **[plans-directory](./rules/plans-directory.md)** — save plans and similar documents under the
-  project's planning directory, following a certain structure.
+  project's planning directory, following a certain structure; one per repository, resolved to the
+  main checkout from a linked worktree.
 - **[read-other-repos-governing-docs](./rules/read-other-repos-governing-docs.md)** — before
   editing another repo's files, read and follow that repo's governing docs — they don't auto-load.
 - **[self-contained-docs](./rules/self-contained-docs.md)** — keep planning and design docs, and
