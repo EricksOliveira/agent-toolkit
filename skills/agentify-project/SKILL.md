@@ -5,7 +5,7 @@ disable-model-invocation: true
 type: flow
 license: MIT
 metadata:
-  version: "0.2"
+  version: "0.3"
 ---
 
 # Agentify project
@@ -32,8 +32,9 @@ Invocation: `/agentify-project [audit] [path]`
 - Generic: behavior is driven by [references/agent-matrix.md](references/agent-matrix.md) — read
   it whenever agent detection or an agent's specifics are needed. One documented exception, the
   **Claude carve-out**: a team with no Claude users at all is rare, so Claude wiring (the
-  CLAUDE.md pointer, the `.claude/skills/` links, the Claude gitignore entries) is applied
-  unconditionally, never detection-gated.
+  `.claude/skills/` links, the Claude gitignore entries) is applied unconditionally, never
+  detection-gated. A CLAUDE.md pointer is not part of it: current Claude Code reads AGENTS.md
+  itself (target-structure §2).
 
 ## 1. Audit (read-only)
 
@@ -71,15 +72,16 @@ slimming/docs → skills → gitignore → extras.
 
 **Entry files.** Invariant covering every starting state: the content of **all** existing entry
 files — any agent's, including a divergent CLAUDE.md + AGENTS.md pair — feeds the slimming
-mapping; AGENTS.md ends canonical; every detected entry file ends as a pointer (or duplicated
-content, per matrix), CLAUDE.md always included. Common case (CLAUDE.md exists, no AGENTS.md):
-rename it to AGENTS.md — git detects the rename — and recreate CLAUDE.md as `@AGENTS.md` plus any
-genuinely Claude-specific remainder. AGENTS.md-only and third-party-only repos: same invariant —
-create the missing pointer(s), seed AGENTS.md from whatever entry-file content exists. Greenfield
-(no entry file of any agent): minimal seed from cheap reconnaissance (README, package manifest /
-build files) — one-liner, **verified** build/test/run commands, planning-dir convention — plus
-the pointer; deep doc generation is out of scope, the structure grows later via `/self-improve`
-and `/memory-doctor`.
+mapping; AGENTS.md ends canonical; every detected third-party entry file ends as a pointer (or
+duplicated content, per matrix); CLAUDE.md ends absent or as a pointer, per target-structure §2.
+Common case (CLAUDE.md exists, no AGENTS.md): rename it to AGENTS.md — git detects the rename —
+and recreate CLAUDE.md as `@AGENTS.md` only when §2 calls for one (a genuinely Claude-specific
+remainder, or sessions that cannot load AGENTS.md); otherwise it stays deleted. AGENTS.md-only and
+third-party-only repos: same invariant — pointers only for the third-party agents detected, never
+a bare CLAUDE.md; seed AGENTS.md from whatever entry-file content exists. Greenfield (no entry
+file of any agent): minimal seed from cheap reconnaissance (README, package manifest / build
+files) — one-liner, **verified** build/test/run commands, planning-dir convention; deep doc
+generation is out of scope, the structure grows later via `/self-improve` and `/memory-doctor`.
 
 **Slimming (mapping-first).** Draft one full mapping: each block → stays / moves to existing doc
 X / new doc Y, applying the keep-vs-extract test (target-structure §1); where a block's relevance
@@ -103,7 +105,9 @@ Done when every selected area is applied or explicitly skipped by the user.
 ## 4. Verify (mechanical)
 
 Every AGENTS.md reference resolves; symlinks point at real dirs; `git check-ignore` confirms each
-ignore entry; CLAUDE.md pointer intact; duplicated entry files match AGENTS.md. Close with a
+ignore entry; no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` shadows AGENTS.md (each
+absent, or an `@AGENTS.md` pointer) and, when the root keeps a CLAUDE.md, every nested AGENTS.md
+has its pointer too (target-structure §2); duplicated entry files match AGENTS.md. Close with a
 short converged-state report of what changed.
 
 ## 5. Close
@@ -119,5 +123,6 @@ Suggest, each only when installed and applicable — skip silently otherwise:
 ## Monorepos
 
 Full treatment targets the repo root. Nested entry files are offered only the cheap mechanical
-indirection (nested CLAUDE.md → nested AGENTS.md + pointer); defer nested slimming to a re-run
-with that subdirectory as the `path` argument.
+indirection (nested CLAUDE.md → nested AGENTS.md; pointer per target-structure §2 — always kept
+while the root has a CLAUDE.md); defer nested slimming to a re-run with that subdirectory as the
+`path` argument.

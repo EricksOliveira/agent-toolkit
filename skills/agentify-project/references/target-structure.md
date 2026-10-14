@@ -19,14 +19,24 @@ which would silently defeat progressive disclosure (see the Claude row in
 [agent-matrix.md](agent-matrix.md)). Only `@`-prefixed paths are imports — plain paths and
 markdown links never import; to mention an `@path` literally, wrap it in backticks.
 
-## 2. CLAUDE.md — pointer
+## 2. CLAUDE.md — only when needed
 
-Contains `@AGENTS.md`. Mandatory, not transitional, and never detection-gated (Claude carve-out):
-Claude Code reads CLAUDE.md, **not** AGENTS.md, and its official docs recommend exactly this
-pointer. Genuinely Claude-only instructions may legitimately stay below the import (official
-pattern) — preserve them there instead of force-moving. A CLAUDE.md→AGENTS.md symlink also works
-but needs Developer Mode on Windows and forbids Claude-specific additions, so the import is the
-default.
+Claude Code v2.1.277+ reads AGENTS.md itself (root and `.claude/AGENTS.md` at start, a
+subdirectory's when it opens a file there), so the default is **no CLAUDE.md**. Any `CLAUDE.md`,
+`.claude/CLAUDE.md` or `CLAUDE.local.md` in the working directory or above makes Claude read
+those **instead** — every AGENTS.md, nested ones included (`~/.claude/CLAUDE.md` and
+`.claude/rules/` load alongside either). Keep or create a CLAUDE.md holding `@AGENTS.md` only
+when genuinely Claude-only instructions must live below the import (official pattern — preserve
+them there instead of force-moving) or some sessions cannot load AGENTS.md (Claude Code < 2.1.281
+on Bedrock, Vertex AI, a gateway or with telemetry off, the built-in `agents-md` plugin
+(`cc-plugin-agents-md@builtin` from v2.1.285) disabled, **Project instructions** set to
+`claude-md`); the import never loads AGENTS.md twice. A root CLAUDE.md kept for either reason
+shadows nested AGENTS.md files too, so every nested entry file then keeps its own `@AGENTS.md`
+pointer. A CLAUDE.md that only says in words to read AGENTS.md becomes the import or is deleted. A
+CLAUDE.md→AGENTS.md symlink also works but needs Developer Mode on Windows and forbids
+Claude-specific additions. `CLAUDE.local.md` is gitignored (per matrix) yet still shadows
+AGENTS.md: the onboarding doc (§8) tells developers to open theirs with `@AGENTS.md`, or to set
+**Project instructions** to `claude-md-and-agents-md`.
 
 ## 3. Other agents' entry files — detect and convert only
 
@@ -79,7 +89,8 @@ In the governing-docs dir: the layout explained; hookup recipes for the agents w
 (accumulated from the skill's runtime research); a generic recipe for any other agent — point it
 at AGENTS.md via its entry-file mechanism, or re-run `/agentify-project` to research and wire it —
 which keeps detect-only from becoming a chicken-and-egg trap for agents with no repo traces yet;
-and the Windows symlink caveat (git `core.symlinks` + Developer Mode).
+the `CLAUDE.local.md` shadowing hazard and its two remedies (§2); and the Windows symlink caveat
+(git `core.symlinks` + Developer Mode).
 
 ## 9. README pointer
 
@@ -88,8 +99,8 @@ hidden dirs can discover the structure.
 
 ## Claude-only variant
 
-A team may deliberately stay Claude-only; the selected areas then apply within that layout:
-CLAUDE.md stays the canonical index (same slimming rules and plain-link references), the skills
-area is not applicable (real dirs stay under `.claude/skills/`), the planning dir defaults to
-`.claude/plans/`, and doc locations are confirmed with the user with a Claude-conventional
-default (e.g. `docs/` or `.claude/docs/`).
+A team may deliberately stay Claude-only; the selected areas then apply within that layout: the
+entry file in use (AGENTS.md or CLAUDE.md) stays the canonical index (same slimming rules and
+plain-link references), the skills area is not applicable (real dirs stay under `.claude/skills/`),
+the planning dir defaults to `.claude/plans/`, and doc locations are confirmed with the user with a
+Claude-conventional default (e.g. `docs/` or `.claude/docs/`).

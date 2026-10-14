@@ -8,7 +8,7 @@ regardless of which agent it is.
 | Path | What it is |
 | --- | --- |
 | `AGENTS.md` | The canonical entry file, read by every agent. Deliberately lean — an index, not a manual. |
-| `CLAUDE.md` | A pointer holding `@AGENTS.md`, because Claude Code reads `CLAUDE.md` and not `AGENTS.md`. |
+| `CLAUDE.md` | A pointer holding `@AGENTS.md`, for Claude Code sessions that cannot read `AGENTS.md` directly (before v2.1.281 on some setups); without it, current versions would read `AGENTS.md` on their own. |
 | `docs/` | Governing docs, linked from `AGENTS.md` and loaded only when the task needs them. |
 | `.agents/plans/` | Planning documents, gitignored — local to whoever wrote them. |
 | `skills/`, `rules/` | What the toolkit ships, not this repo's own agent config. |
