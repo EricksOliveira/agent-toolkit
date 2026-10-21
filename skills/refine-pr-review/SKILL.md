@@ -3,7 +3,7 @@ name: refine-pr-review
 description: Triage a fetched PR review with the user, comment by comment, drafting each reply and producing a REQUIREMENTS file for the accepted code changes. Takes the PR-REVIEW file produced by fetch-pr-review, or a PR URL. Invoke manually only.
 license: MIT
 metadata:
-  version: "1.7"
+  version: "1.8"
 ---
 
 # Refine PR review
@@ -18,6 +18,9 @@ A PR URL instead: when the harness has subagents and fetch-pr-review is installe
 [delegate.md](../fetch-pr-review/delegate.md) and the file it returns is the input. Not installed
 → say so and ask for the fetched file; installed but no subagents → hand off
 `/fetch-pr-review <url>` to a fresh session and stop.
+
+Its own `.PR-REVIEW.REQUIREMENTS.md` instead, once a blocking answer is in: Phase 1 and Lessons
+stand as its `.PR-REVIEW.ANSWERS.md` records them; run only Phase 2 on that file, then Next step.
 
 ## Verdicts
 
@@ -99,7 +102,7 @@ naming — all as written, with these overrides:
   Location label), e.g. `("Validate both new option arguments", install.sh:88)` — never a row
   number.
 - Nothing about replies or verdicts enters the REQUIREMENTS file.
-- Ignore its closing hand-off instructions — this skill owns the hand-off.
+- Ignore its hand-off commands, the blocking-question one included — this skill owns the hand-off.
 
 When nothing is accepted (no address, partial, bot: included or bot: partial), skip this phase: no
 REQUIREMENTS file, nothing to plan or execute.
@@ -148,9 +151,11 @@ row numbers; none → no section.
 
 State the output paths (project-relative). Remind the user the ANSWERS file is theirs to post
 manually once the fixes land. No REQUIREMENTS file → no launch command, only that reminder (and
-the self-improve line below when Lessons were written). Otherwise hand off by the size of the
-accepted change set, leading with your recommendation but giving the options as single
-copy-pasteable launch commands (vendor-agnostic — `claude` below is only the example):
+the self-improve line below when Lessons were written). While the REQUIREMENTS file holds a
+**blocking** Open questions entry, print no execute or plan command, only who must answer it and
+the command for once the answer is in: `/refine-pr-review <requirements-file>`. Otherwise hand off
+by the size of the accepted change set, leading with your recommendation but giving the options
+as single copy-pasteable launch commands (vendor-agnostic — `claude` below is only the example):
 
 Small, mechanical change set — execute directly:
 
