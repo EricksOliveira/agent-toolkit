@@ -85,8 +85,8 @@ execute them one at a time and consolidate the changes.
 Review helpers that check the codebase while assisting with code or ticket reviews.
 
 - **[fetch-pr-review](./skills/fetch-pr-review/SKILL.md)** — collect the comments left by other
-  reviewers on your PR and save them into a markdown doc, ready to address (or push back on), for
-  example via refine-pr-review.
+  reviewers on your PR and save them into a markdown doc, pinned to the PR head, ready to address
+  (or push back on), for example via refine-pr-review.
 - **[refine-pr-review](./skills/refine-pr-review/SKILL.md)** — go through a fetched PR review
   together, comment by comment — address, partial, or push back — drafting the replies, turning
   the accepted changes into a requirements doc, and recording the durable lessons, which
@@ -260,6 +260,7 @@ flowchart TD
   refine -. when available .-> harden
   refine -. when available .-> fetch_ticket
   refine_pr -. when available .-> fetch_pr
+  refine_pr -. when available .-> harden
   plan -. when available .-> harden
   harden -. when available .-> simple
   harden -. when available .-> self
