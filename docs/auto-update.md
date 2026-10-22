@@ -40,9 +40,9 @@ it they skip the links still pointing at the old path as entries they do not own
 
 ## Notes
 
-- With `CLAUDE_CONFIG_DIR` set, pass `--skills-dir "$CLAUDE_CONFIG_DIR/skills"` and `--rules-dir
-  "$CLAUDE_CONFIG_DIR/rules"` to get wired up; the hook is registered for Claude's own directories
-  only.
+- With `CLAUDE_CONFIG_DIR` set, pass `--skills-dir "$CLAUDE_CONFIG_DIR/skills"` and
+  `--rules-dir "$CLAUDE_CONFIG_DIR/rules"` to get wired up; the hook is registered for Claude's own
+  directories only.
 - Hooks from user settings do not run in a folder until its workspace-trust dialog is accepted.
 - One hook per settings file: an install from another clone points it at that clone, as it does
   the links, and `--no-auto-update` from that clone removes it.

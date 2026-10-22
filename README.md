@@ -115,7 +115,7 @@ Review helpers that check the codebase while assisting with code or ticket revie
   much of a ticket is already implemented in the code, saving a per-requirement status report
   (done, partial, not done, or not verifiable).
 - **[fresh-eyes-review](./skills/fresh-eyes-review/SKILL.md)** — let an agent with a fresh
-  perspective review a changeset and report its findings back to the main session. [Read more about fresh-eyes-review](https://medium.com/engineering-in-the-age-of-ai/more-powerful-ai-reviews-with-fresh-eyes-bfad221748c0)
+  perspective review a changeset and report its findings back to the main session. [Read more about fresh-eyes-review](https://medium.com/engineering-in-the-age-of-ai/more-powerful-ai-reviews-with-fresh-eyes-bfad221748c0).
 - **[self-review](./skills/self-review/SKILL.md)** — get your changeset merge-ready before
   requesting review: a fresh-context reviewer checks it as a maintainer would, you answer every
   finding (or say `autoaccept` to let the agent decide), and a compact report for the PR proves
@@ -208,8 +208,8 @@ installed separately from the skills.
   explanations, recaps to the user, and documents humans read via
   [explain-in-simple-language](./skills/explain-in-simple-language/SKILL.md).
 
-One more rule for non-English speakers ships as a copy-paste snippet rather than a file, since it 
-needs the language filled in — [use-my-mothertongue](./docs/use-my-mothertongue-rule.md) makes  
+One more rule for non-English speakers ships as a copy-paste snippet rather than a file, since it
+needs the language filled in — [use-my-mothertongue](./docs/use-my-mothertongue-rule.md) makes
 your agent talk to you in your language while everything it writes into the project stays English.
 
 ### How to install the rules
