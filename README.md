@@ -68,6 +68,7 @@ then let a fresh session execute them one at a time and consolidate the changes.
 - **[split-plan-tasks](./skills/split-plan-tasks/SKILL.md)** — break a plan into individually
   reviewable tasks grouped into PR-sized batches, appended to the plan file for a fresh session to
   execute one at a time.
+  [Why not execute the full plan at once](https://medium.com/engineering-in-the-age-of-ai/do-not-execute-the-full-plan-break-it-down-step-by-step-2e0ba30ddf73).
 - **[execute-plan-tasks](./skills/execute-plan-tasks/SKILL.md)** — execute one task of that
   breakdown at a time: implement it, verify it, tick it off in the plan, and hand it back for
   review before the next; when a group is done, hand it to self-review (if installed) before the
@@ -103,6 +104,7 @@ Review helpers that check the codebase while assisting with code or ticket revie
 - **[maintainer-review](./skills/maintainer-review/SKILL.md)** — review someone else's PR as the
   maintainer deciding whether it merges: every prior comment walked, every claim verified, then
   comment, approve or fix the contributor's branch on your go-ahead.
+  [How open source projects can cope with AI slop](https://medium.com/engineering-in-the-age-of-ai/how-open-source-projects-can-cope-with-ai-slop-9ca7b015602e).
 - **[review-ticket](./skills/review-ticket/SKILL.md)** — triage a ticket or ticket set before
   anyone picks it up, saving a review with a feature walkthrough and the questions worth raising
   with the team.

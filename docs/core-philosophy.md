@@ -153,3 +153,7 @@ Skills in-depth and relevant miscellaneous:
 - [The Missing Step in Agentic Coding: The Handover](https://medium.com/engineering-in-the-age-of-ai/the-missing-step-in-agentic-coding-the-handover-d1963c3d2c1d) — article dedicated to the /handover skill
 
 - [More powerful AI reviews with fresh eyes](https://medium.com/engineering-in-the-age-of-ai/more-powerful-ai-reviews-with-fresh-eyes-bfad221748c0)
+
+- [Do not execute the full plan: break it down step by step](https://medium.com/engineering-in-the-age-of-ai/do-not-execute-the-full-plan-break-it-down-step-by-step-2e0ba30ddf73) — article dedicated to /split-plan-tasks and /execute-plan-tasks
+
+- [How open source projects can cope with AI slop](https://medium.com/engineering-in-the-age-of-ai/how-open-source-projects-can-cope-with-ai-slop-9ca7b015602e) — article dedicated to the /maintainer-review skill
