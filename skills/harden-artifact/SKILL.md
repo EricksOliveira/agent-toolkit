@@ -5,7 +5,7 @@ disable-model-invocation: true
 type: flow
 license: MIT
 metadata:
-  version: "0.4"
+  version: "0.5"
 ---
 
 # Harden artifact
@@ -171,29 +171,42 @@ Fixed findings sharing a cause that a governing skill or doc covers, or should �
 that wrote the artifact, a project doc — are a lesson: when `self-improve` is available, print it
 in one line with its target and offer to run it, never unasked. One-off slips earn no offer.
 
-Ready → hand off the next phase as copy-pasteable launch commands in the syntax of the agent
-tool in use (`claude` is only the example), `<slug>` being the artifact's; requirements with a plan
-of the same base hand off that plan's next phase in place of create-plan; a line naming a skill
-only when that skill is available:
+Ready → hand off the next phase, each option as its own fenced block under the label quoted below,
+holding one copy-pasteable launch command in the syntax of the agent tool in use (`claude` is only
+the example), `<slug>` being the artifact's; a block only when its skill is available; requirements
+with a plan of the same base hand off that plan's next phase in place of create-plan:
 
-```
-claude --name create-plan-<slug> "/create-implementation-plan <path>.REQUIREMENTS.md"               # after requirements
-claude --name create-manual-test-<slug> "/create-manual-test-instructions <path>.REQUIREMENTS.md"   # after requirements
-claude --name execute-plan-<slug> "Execute the plan <path>.PLAN.md, then run the project's validation (lint, tests, build); report, never commit"   # after an unsplit plan
-claude --name split-plan-tasks-<slug> "/split-plan-tasks <path>.PLAN.md"                            # after an unsplit plan, or a split one a fix reached (replace)
-claude --name execute-tasks-<slug> "/execute-plan-tasks <path>.PLAN.md"                             # after a split plan no fix reached
-```
+- After requirements — "Plan the implementation:" and "Write the QA manual test:":
 
-Then offer the alternative — clearing the current session (`/clear` is only the example) and
-running the same prompts, under the same rules:
+  ```
+  claude --name create-plan-<slug> "/create-implementation-plan <path>.REQUIREMENTS.md"
+  ```
 
-```
-/create-implementation-plan <path>.REQUIREMENTS.md       # after requirements
-/create-manual-test-instructions <path>.REQUIREMENTS.md  # after requirements
-Execute the plan <path>.PLAN.md, then run the project's validation (lint, tests, build); report, never commit   # after an unsplit plan
-/split-plan-tasks <path>.PLAN.md                         # after an unsplit plan, or a split one a fix reached (replace)
-/execute-plan-tasks <path>.PLAN.md                       # after a split plan no fix reached
-```
+  ```
+  claude --name create-manual-test-<slug> "/create-manual-test-instructions <path>.REQUIREMENTS.md"
+  ```
+
+- After an unsplit plan — "Execute the plan:" and "or split it into tasks first, for small
+  reviewable increments:"; after a split plan a fix reached, the split block alone, labelled "Split
+  the plan into tasks again, replacing the current split:":
+
+  ```
+  claude --name execute-plan-<slug> "Execute the plan <path>.PLAN.md, then run the project's validation (lint, tests, build); report, never commit"
+  ```
+
+  ```
+  claude --name split-plan-tasks-<slug> "/split-plan-tasks <path>.PLAN.md"
+  ```
+
+- After a split plan no fix reached — "Execute the tasks:":
+
+  ```
+  claude --name execute-tasks-<slug> "/execute-plan-tasks <path>.PLAN.md"
+  ```
+
+Then the alternative: one line offering to clear the current session (`/clear` is only the example)
+and run the next phase here, then the same labelled blocks with the bare prompts, under the same
+rules.
 
 Done when all are printed, in both forms.
 

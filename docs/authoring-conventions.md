@@ -26,10 +26,15 @@ purpose: sibling skills and `--name` launches must be able to start them. Do not
 
 ## Next-phase hand-off
 
-A skill that ends by handing work to another skill prints one copy-pasteable launch command per
-next phase — the syntax of the agent in use, `claude` only the example, session named
-`<phase>-<slug>` — then the alternative of clearing the current session (`/clear`, again only the
-example) and running the next skill in it. A line for an optional sibling says "when available".
+A skill that ends by handing work to another skill prints each next-phase option as its own fenced
+block holding one copy-pasteable launch command — the syntax of the agent in use, `claude` only the
+example, session named `<phase>-<slug>` — under a label line saying what the option is and when to
+pick it; among alternatives, labels after the first printed start "or" ("Execute the plan:", then
+"or split it into tasks first, for small reviewable increments:"), while a further step rather than
+an alternative keeps a plain label, and a lone option needs none. Then the alternative: one line
+offering to clear the current session (`/clear`, again only the example) and run the next phase
+there, followed by the same labelled blocks with the bare prompts, same order. An option naming an
+optional sibling is printed only when that skill is available.
 
 ## Markdown
 

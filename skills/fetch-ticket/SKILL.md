@@ -3,7 +3,7 @@ name: fetch-ticket
 description: Fetch one or more tickets/issues from their tracker (Azure DevOps, Jira, GitHub, …) and save each as a self-contained markdown ticket file. Fetch only — no analysis or planning.
 license: MIT
 metadata:
-  version: "1.15"
+  version: "1.16"
 ---
 
 # Ticket Fetcher
@@ -147,18 +147,18 @@ downloaded, **first emit a clear warning** listing each missing file's name and 
 instructing the user to download it and save it under that exact name so the embeds resolve — or,
 with `/attach-to-ticket` available, to paste it (or its saved path) and run that skill. Without
 refine-ticket available the result ends there; with it, hand off the next phase as a **single
-copy-pasteable launch command** — session name and prompt combined, so one paste starts the
-session. Use the launch syntax of the agent tool in use (vendor-agnostic — `claude` below is only
-the example), naming the session `refine-<slug>`:
+copy-pasteable launch command** in a fenced block — session name and prompt combined, so one paste
+starts the session — in the launch syntax of the agent tool in use (vendor-agnostic — `claude`
+below is only the example), naming the session `refine-<slug>`; several tickets → one block per
+ticket, in the suggested execution order, under a label naming it:
 
 ```
 claude --name refine-<slug> "/refine-ticket <output-dir>/<id>-<slug>.TICKET.md"
 ```
 
-Then offer the alternative — clearing the current session instead (vendor-agnostic — `/clear` below
-is only the example; use the clear command of the agent tool in use):
-
-OR /clear and run:
+Then offer the alternative: one line offering to clear the current session (vendor-agnostic —
+`/clear` is only the example; use the clear command of the agent tool in use) and run the next
+phase here, then the same block(s) with the bare prompt:
 
 ```
 /refine-ticket <output-dir>/<id>-<slug>.TICKET.md

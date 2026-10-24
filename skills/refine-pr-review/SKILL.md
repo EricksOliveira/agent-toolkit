@@ -3,7 +3,7 @@ name: refine-pr-review
 description: Triage a fetched PR review with the user, comment by comment, drafting each reply and producing a REQUIREMENTS file for the accepted code changes. Takes the PR-REVIEW file produced by fetch-pr-review, or a PR URL. Invoke manually only.
 license: MIT
 metadata:
-  version: "1.9"
+  version: "1.10"
 ---
 
 # Refine PR review
@@ -181,37 +181,39 @@ manually once the fixes land. No REQUIREMENTS file → no launch command, only t
 the self-improve line below when Lessons were written). While the REQUIREMENTS file holds a
 **blocking** Open questions entry, print no execute or plan command, only who must answer it and
 the command for once the answer is in: `/refine-pr-review <requirements-file>`. Otherwise hand off
-by the size of the accepted change set, leading with your recommendation but giving the options
-as single copy-pasteable launch commands (vendor-agnostic — `claude` below is only the example).
-The recommendation names only options printed below: without create-implementation-plan, a
-substantial change set is recommended to harden first (when available), else to execute directly.
+by the size of the accepted change set, leading with your recommendation but giving each option as
+its own fenced block under the label quoted below, holding a single copy-pasteable launch command
+(vendor-agnostic — `claude` below is only the example). The recommendation names only options
+printed below: without create-implementation-plan, a substantial change set is recommended to harden
+first (when available), else to execute directly.
 
-Small, mechanical change set — execute directly:
+"Apply the changes directly, for a small mechanical change set:"
 
 ```
 claude --name execute-review-<slug> "Apply <requirements-file>, then run the project's validation (lint, tests, build)"
 ```
 
-`/create-implementation-plan` available — substantial change set (cross-file rework, design
-decisions), plan first:
+`/create-implementation-plan` available — "or plan first, for a substantial change set (cross-file
+rework, design decisions):"
 
 ```
 claude --name create-plan-<slug> "/create-implementation-plan <requirements-file>"
 ```
 
-`/harden-artifact` available — harden the requirements first, recommended for a substantial change
-set:
+`/harden-artifact` available — "or harden the requirements first, recommended for a substantial
+change set:"
 
 ```
 claude --name harden-requirements-<slug> "/harden-artifact <requirements-file>"
 ```
 
-Lessons written and `/self-improve` available — persist them after the execute session, since a
-mechanical lesson may edit a lint config or CI job it also touches:
+Lessons written and `/self-improve` available — "Persist the lessons after the execute session:",
+since a mechanical lesson may edit a lint config or CI job the execution also touches:
 
 ```
 claude --name self-improve-<slug> "/self-improve Persist the lessons listed under Lessons in <answers-file>"
 ```
 
-Then offer the alternative — clearing the current session (vendor-agnostic — `/clear` is only the
-example) and running the chosen prompt directly; the same gates apply to the bare prompts.
+Then offer the alternative: one line offering to clear the current session (vendor-agnostic —
+`/clear` is only the example) and run the next phase here, then the same labelled blocks with the
+bare prompts, under the same gates.

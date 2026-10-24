@@ -5,7 +5,7 @@ disable-model-invocation: true
 type: flow
 license: MIT
 metadata:
-  version: "0.5"
+  version: "0.6"
 ---
 
 # Execute plan tasks
@@ -71,43 +71,33 @@ check handed to the user never holds the task's tick back, while a manual-only A
 stays unticked even when its tasks are ticked; both are listed as pending the user's check. Then
 print the files touched, any deviation logged, and the task's *Commit* subject (absent → propose
 one in the repo's style) to commit once the change is reviewed. Finally hand off the next unticked
-task as a single copy-pasteable launch command — session name and prompt combined, in the launch
-syntax of the agent tool in use (vendor-agnostic — `claude` below is only the example; `<slug>` is
-the plan filename without id prefix or extension):
+task as its own fenced block under the label "Next task:", holding a single copy-pasteable launch
+command — session name and prompt combined, in the launch syntax of the agent tool in use
+(vendor-agnostic — `claude` below is only the example; `<slug>` is the plan filename without id
+prefix or extension):
 
 ```
 claude --name execute-tasks-<slug> "/execute-plan-tasks <plan-path> <next-task-id>"
 ```
 
-Then offer the alternative — clearing the current session instead (vendor-agnostic — `/clear` is
-only the example):
-
-OR /clear and run:
-
-```
-/execute-plan-tasks <plan-path> <next-task-id>
-```
+Then offer the alternative: one line offering to clear the current session (vendor-agnostic —
+`/clear` is only the example) and run the next phase here, then the same labelled block(s) with the
+bare prompt, `/execute-plan-tasks <plan-path> <next-task-id>`.
 
 When the finished task completes its group, say so first: the group is one PR, so its tasks get
-committed and reviewed before the next group starts. With `/self-review` available, print its
-command pair — the step before the next group — ahead of the next-task commands, also when the
-no-task-left line replaces them (same `<slug>`):
+committed and reviewed before the next group starts. With `/self-review` available, add in both
+forms, ahead of the next-task block, a block labelled "Review the group first:" (same `<slug>`),
+also when the no-task-left line replaces the next-task block:
 
 ```
 claude --name self-review-<slug> "/self-review"
 ```
 
-OR /clear and run:
-
-```
-/self-review
-```
-
-When no task is left, say in place of the next-task commands that the plan is done, or, while an
+When no task is left, say in place of the next-task blocks that the plan is done, or, while an
 AC is pending the user's check, that its tasks are done and acceptance is pending.
 
 Done when the touched files, the commit subject, the checks pending the user, both `/self-review`
-forms when a group completed and it is available, and either both next-task commands or the
+forms when a group completed and it is available, and either both next-task forms or the
 no-task-left line are printed.
 
 ## Boundaries

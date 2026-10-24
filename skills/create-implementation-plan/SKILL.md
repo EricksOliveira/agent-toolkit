@@ -3,7 +3,7 @@ name: create-implementation-plan
 description: Turn a refined requirements document into a structured implementation PLAN.md a fresh session can execute. Planning only — decides the "how", not the "what". Invoke manually only.
 license: MIT
 metadata:
-  version: "1.16"
+  version: "1.17"
 ---
 
 # Create Implementation Plan
@@ -147,13 +147,13 @@ something is a decision or a mechanical detail, put it in.
 - Write the plan to disk only after every open question is resolved.
 
 When done, state that the plan file is ready, by its **project-relative path** (relative to the
-working directory, never absolute), and offer these ways forward, each as a **single copy-pasteable
-launch command** — session name and prompt combined, so one paste starts a **fresh session** with
-a clean context. Use the agent tool's launch syntax (`claude` below is only the example) and name
-the session after `<slug>`, the plan filename's slug (without id prefix or extension), so the
-phase is recognizable in the session list:
+working directory, never absolute), and offer these ways forward, each as its own fenced block under
+the label quoted below, holding a **single copy-pasteable launch command** — session name and
+prompt combined, so one paste starts a **fresh session** with a clean context. Use the agent tool's
+launch syntax (`claude` below is only the example) and name the session after `<slug>`, the plan
+filename's slug (without id prefix or extension), so the phase is recognizable in the session list:
 
-1. **Execute the plan** — reads **only the plan file**. `<validation>` is the project's own
+1. "Execute the plan:" — reads **only the plan file**. `<validation>` is the project's own
    checks: the commands its governing docs name, else the toolchain's (lint, tests, build — only
    those that exist); nothing runnable → drop the clause:
 
@@ -161,33 +161,20 @@ phase is recognizable in the session list:
    claude --name execute-plan-report-approval "Execute the plan .agents/plans/123-report-approval/123-report-approval.PLAN.md, then run <validation>; report, never commit"
    ```
 
-2. **Split the plan into tasks** first, when `split-plan-tasks` is available, so the work lands in
-   small reviewable increments:
+2. "or split it into tasks first, for small reviewable increments:" — when `split-plan-tasks` is
+   available:
 
    ```
    claude --name split-plan-tasks-report-approval "/split-plan-tasks .agents/plans/123-report-approval/123-report-approval.PLAN.md"
    ```
 
-3. **Harden the plan** first, when `harden-artifact` is available, so a fresh reviewer challenges
-   it against the ticket and the code before anything is built:
+3. "or harden it first, so a fresh reviewer challenges it against the ticket and the code before
+   anything is built:" — when `harden-artifact` is available:
 
    ```
    claude --name harden-plan-report-approval "/harden-artifact .agents/plans/123-report-approval/123-report-approval.PLAN.md"
    ```
 
-Then offer clearing the current session instead (`/clear` below is only the example; use the agent
-tool's clear command):
-
-OR /clear and run one of:
-
-```
-Execute the plan .agents/plans/123-report-approval/123-report-approval.PLAN.md, then run <validation>; report, never commit
-```
-
-```
-/split-plan-tasks .agents/plans/123-report-approval/123-report-approval.PLAN.md
-```
-
-```
-/harden-artifact .agents/plans/123-report-approval/123-report-approval.PLAN.md
-```
+Then offer the alternative: one line offering to clear the current session (`/clear` below is only
+the example; use the agent tool's clear command) and run the next phase here, then the same
+labelled blocks with the bare prompts.

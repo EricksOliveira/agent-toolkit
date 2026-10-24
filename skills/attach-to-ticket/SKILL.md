@@ -3,7 +3,7 @@ name: attach-to-ticket
 description: Attach pasted images, files or URLs to a fetched ticket, saved beside its ticket file and referenced from it, or fill an attachment the fetch could not download. Local only — never queries or edits the tracker.
 license: MIT
 metadata:
-  version: "0.3"
+  version: "0.4"
 ---
 
 # Attach to ticket
@@ -69,9 +69,10 @@ documents beyond the entries below and the REQUIREMENTS line of step 6.
    missing-attachments question (review-ticket's or refine-ticket's): report only that, no launch
    or clear command; the caller resumes. Standalone, when the document is a ticket file with no
    REQUIREMENTS file yet and `/refine-ticket` is available, hand off with one copy-pasteable launch
-   command in the agent tool's syntax (e.g.
-   `claude --name refine-<slug> "/refine-ticket <document>"`), then the alternative, the tool's
-   clear command (e.g. `/clear`) followed by `/refine-ticket <document>`.
+   command in a fenced block, in the agent tool's syntax (e.g.
+   `claude --name refine-<slug> "/refine-ticket <document>"`), then the alternative: one line
+   offering the tool's clear command (e.g. `/clear`), then `/refine-ticket <document>` in its own
+   block.
 
 ## Sources
 

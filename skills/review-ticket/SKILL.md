@@ -5,7 +5,7 @@ disable-model-invocation: true
 type: flow
 license: MIT
 metadata:
-  version: "1.7"
+  version: "1.8"
 ---
 
 # Review ticket
@@ -212,19 +212,27 @@ one-liner saying it's tracing only and safe to ignore: each killed question (a r
 part included) with the answer that settled it and its citation, and each cheap detail the
 question bar dropped, with the default assumed.
 
-Close by handing off each next phase as a copy-pasteable launch command in the syntax of the agent
-tool in use (`claude` is only the example), session named `<phase>-<slug>`. A line names a skill
-only when that skill is available; the refine lines only with no blockers, one per ticket in the
-set's suggested execution order:
+Close by handing off each next phase as its own fenced block under the label quoted below, holding
+one copy-pasteable launch command in the syntax of the agent tool in use (`claude` is only the
+example), session named `<phase>-<slug>`.
+A block only when its skill is available; the refine blocks only with no blockers, one per ticket in
+the set's suggested execution order, each label naming its ticket:
+
+"Verify your understanding of the set first:"
 
 ```
 claude --name verify-<slug> "/verify-understanding <review-file>"
+```
+
+"Refine <ticket>:" (the first starting "or" when the verify block precedes it)
+
+```
 claude --name refine-<slug> "/refine-ticket <ticket-file>"
 ```
 
-Then the alternative: the tool's clear command (`/clear` is only the example) followed by the same
-slash command. When Today already seems to deliver the After, also suggest
-`/check-ticket-implementation <ticket-file>`, only when that skill is available.
+Then the alternative: one line offering the tool's clear command (`/clear` is only the example),
+then the same labelled blocks with the bare slash commands. When Today already seems to deliver the
+After, also suggest `/check-ticket-implementation <ticket-file>`, only when that skill is available.
 
 ## Boundaries
 
