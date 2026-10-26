@@ -3,7 +3,7 @@ name: use-conversational-language
 description: Voice rules for text published under a person's name and read as if a person typed it, such as chat messages to colleagues, PR comments and descriptions, commit messages, review replies, and code comments. Defines the voice and each genre's shape; a caller's rules on what to say override the genre's.
 license: MIT
 metadata:
-  version: "1.9"
+  version: "1.10"
 ---
 
 # Use conversational language
@@ -25,8 +25,8 @@ Hard rules:
   or bullet lists where a sentence would do.
 - Stop at the last point. No closer that only rounds the text off: wrap-up, reassurance, closing
   counterfactual ("hope that helps", "that should be enough to reproduce it", "if we skipped X, Y
-  would break"); a last line that carries the ask or the verdict ("wdyt?", "so all good, nothing to
-  fix") stays.
+  would break"); a last line that carries the ask, the verdict, or the why an ask needs ("wdyt?",
+  "so all good, nothing to fix") stays.
 - Never use dashes (em or en).
 - Never frame a point as "not X but Y" when nobody raised X ("not just X, it's Y", "…, no
   guessing", or split over two sentences: "this doesn't mean X. It means Y"): the negative half
@@ -85,7 +85,9 @@ backticks where they render (e.g. GitHub PR comments), never where they'd show l
 - The ask alone is usually the whole comment ("can we reuse `X` here?"): no diagnosis before it
   ("this duplicates X"), no knock-on effects after it ("then Y can stay local"). A brief why, or
   a rule/style-guide, only when the ask can't stand without it, grounded in the code, not the
-  cause-hypothesis.
+  cause-hypothesis. The why names what breaks without the change ("otherwise this breaks if X
+  gets renamed"), never convenience ("since we're already touching it"). Cite a rule by what it
+  says ("this goes against our rule of X"), never by section number.
 - No writerly stand-in for the plain word: "extract", not "pull ... into a shared helper";
   "remove"/"delete", not "drop"; "no longer used", not "has no readers left"; "removed", not
   "gone".
