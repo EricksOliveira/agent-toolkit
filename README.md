@@ -74,7 +74,8 @@ then let a fresh session execute them one at a time and consolidate the changes.
   review before the next; when a group is done, hand it to self-review (if installed) before the
   next group starts.
 - **[create-manual-test-instructions](./skills/create-manual-test-instructions/SKILL.md)** —
-  derive manual test steps from a ticket or requirements file, useful for the developer or QA.
+  derive manual test steps from a ticket or requirements file, or from a code change (branch,
+  PR, commit range, diff), useful for the developer or QA.
 - **[handover](./skills/handover/SKILL.md)** — package a finished change for its reviewers:
   what it does and why, the decisions and plan deviations worth knowing, and a review guide —
   paste-ready as the PR description. [More about handover](https://medium.com/engineering-in-the-age-of-ai/the-missing-step-in-agentic-coding-the-handover-d1963c3d2c1d).
