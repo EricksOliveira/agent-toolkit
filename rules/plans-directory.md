@@ -22,4 +22,6 @@ document keeping its own `<id>-<slug>` base.
 The planning directory is one per repository, not per checkout. From a linked git worktree (`git
 rev-parse --git-common-dir` is not `.git`), a gitignored planning directory lives in the main
 checkout — the first line of `git worktree list` — never in the worktree, where a fresh copy
-silently forks the task's docs. A tracked one is the branch's own and stays in the worktree.
+silently forks the task's docs. Cannot write there (sandbox, permissions) → ask, e.g. for one
+unsandboxed write; the copy is never the fallback. A tracked one is the branch's own and stays in
+the worktree.
