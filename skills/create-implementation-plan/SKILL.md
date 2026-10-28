@@ -3,7 +3,7 @@ name: create-implementation-plan
 description: Turn a refined requirements document into a structured implementation PLAN.md a fresh session can execute. Planning only — decides the "how", not the "what". Invoke manually only.
 license: MIT
 metadata:
-  version: "1.17"
+  version: "1.18"
 ---
 
 # Create Implementation Plan
@@ -60,6 +60,11 @@ design, not a separate phase that runs before planning starts.
    verbatim" is a decision settled line by line, never by the file's existence. A technical claim
    a step rests on ("X needs exactly Y") is verified against a doc, a compile or a test, never
    read off what the prior art happens to do.
+
+   **Deletions tend to cascade.** When a step deletes code, look for what that code was the last
+   user of (a module, helper, template, constant, package) by searching for each one's other users,
+   and consider naming it for deletion too, repeating for every piece newly orphaned; one the
+   search cannot clear (an export, a name resolved at runtime) is a fork to grill.
 
    **Walk every point a run can stop** when steps change live state in stages (a deploy, a
    migration, a swap): each step, an abort, a timeout, a lost worker, an automatic re-run or
