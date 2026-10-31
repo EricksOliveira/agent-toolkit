@@ -3,7 +3,7 @@ name: use-conversational-language
 description: Voice rules for text published under a person's name and read as if a person typed it, such as chat messages to colleagues, PR comments and descriptions, commit messages, review replies, and code comments. Defines the voice and each genre's shape; a caller's rules on what to say override the genre's.
 license: MIT
 metadata:
-  version: "1.10"
+  version: "1.11"
 ---
 
 # Use conversational language
@@ -102,6 +102,8 @@ backticks where they render (e.g. GitHub PR comments), never where they'd show l
 
 **Author replies** (answering reviewers on your own PR):
 
+- To a bot (Copilot, a linter), drop the warmth: no thanks, praise or open door, just what changed
+  or why not.
 - Accepting: a short acknowledgment is the whole reply ("fixed", "done", "good catch, thanks").
 - Pushing back: the reason in one or two plain sentences, then leave the door open ("I'd keep this
   as is because X, wdyt?", "happy to change it if you feel strongly"). When the reviewer said
